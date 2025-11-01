@@ -1,6 +1,5 @@
 Libft
 
-https://via.placeholder.com/800x200/2D3748/FFFFFF?text=Libft%2520-%2520Your%2520Custom%2520C%2520Library
 📋 Descrição
 
 Libft é o primeiro projeto do currículo da 42, onde criamos nossa própria biblioteca de funções em C. Esta biblioteca contém implementações personalizadas de funções padrão da libc, além de funções utilitárias adicionais que serão úteis ao longo de todo o currículo.
