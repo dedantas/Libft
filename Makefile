@@ -10,54 +10,48 @@
 #                                                                              #
 # **************************************************************************** #
 
+MAKEFLAGS += --silent
+
 # Nome da biblioteca
 NAME = libft.a
 
-# Busca automática de fontes
-SRCS = ./ft_calloc.c ./ft_strncmp.c ./ft_memcmp.c ./ft_toupper.c \
-      ./ft_atoi.c ./ft_tolower.c ./ft_strmapi.c ./ft_strlcpy.c \
-      ./ft_memchr.c ./ft_isascii.c ./ft_isdigit.c ./ft_memmove.c \
-      ./ft_striteri.c ./ft_strnstr.c ./ft_memset.c ./ft_memcpy.c \
-      ./ft_bzero.c ./ft_strchr.c ./ft_strtrim.c ./ft_strrchr.c \
-      ./ft_isalpha.c ./ft_isprint.c ./ft_strdup.c ./ft_strlen.c \
-      ./ft_isalnum.c ./ft_strjoin.c ./ft_split.c ./ft_putchar_fd.c \
-      ./ft_itoa.c ./ft_substr.c ./ft_putstr_fd.c ./ft_putnbr_fd.c \
-      ./ft_strlcat.c ./ft_putendl_fd.c
-BONUS_SRCS = ./ft_lstnew_bonus.c ./ft_lstadd_back_bonus.c \
-	     ./ft_lstadd_front_bonus.c ./ft_lstlast_bonus.c \
-             ./ft_lstsize_bonus.c ./ft_lstdelone_bonus.c \
-             ./ft_lstclear_bonus.c ./ft_lstiter_bonus.c \
-             ./ft_lstmap_bonus.c
-
-# Objetos
-OBJS = $(SRCS:.c=.o)
-OBJS_BONUS = $(BONUS_SRCS:.c=.o)
-
 # Comandos
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 AR = ar -rcs
 RM = rm -f
+
+# Folders
+INCLUDE_DIR	= include
+SRC_DIR		= src
+BUILD_DIR	= build
+
+# Busca automática de fontes
+SRCS = $(shell find $(SRC_DIR) -type f -name "*.c")
+
+# Objetos
+OBJS = $(SRCS:$(SRC_DIR)/%.c=$(BUILD_DIR)/%.o)
 
 # Regra padrão
 all: $(NAME)
 
 # Regra de compilação implícita correta
-.c.o :
-	$(CC) $(CFLAGS) -c $< -o $@
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -I$(INCLUDE_DIR) -c $< -o $@
 
 # Construção da biblioteca
 $(NAME): ${OBJS}
 	${AR} $(NAME) $(OBJS)
-# Bonus
-bonus: $(NAME) $(OBJS_BONUS)
-	${AR} $(NAME) $(OBJS_BONUS)
+	echo Compiled
 # Limpeza
 clean:
-	@$(RM) $(OBJS) $(OBJS_BONUS)
+	rm -rf $(BUILD_DIR)
+	echo Build files cleaned!
 
 fclean: clean
-	@$(RM) $(NAME)
+	$(RM) $(NAME)
+	echo Binaries cleaned!
 
 re: fclean all
 
