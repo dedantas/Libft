@@ -6,7 +6,7 @@
 /*   By: dedantas <dedantas@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 16:09:41 by dedantas          #+#    #+#             */
-/*   Updated: 2025/04/27 14:59:43 by dedantas         ###   ########.fr       */
+/*   Updated: 2025/10/12 12:39:35 by dedantas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,12 @@
 # include <unistd.h>
 # include <stddef.h>
 # include <stdint.h>
+# include <stdarg.h>
+# include <fcntl.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
 
 //caracteres
 int		ft_isdigit(int c);
@@ -73,5 +79,15 @@ void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+//ft_printf
+int		ft_printf(const char *str, ...);
+int		ft_putnbr_base(unsigned int nbr, char *base);
+int		ft_putnbr(int n);
+int		ft_putstr(char *s);
+int		ft_putchar(char c);
+int		ft_putpointer(void *ptr);
+int		ft_putnbr_u(unsigned int n);
+//Get_next_line
+char	*get_next_line(int fd);
 
 #endif
