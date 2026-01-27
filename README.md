@@ -72,7 +72,7 @@
 1. Clone the repository:
 
 ```bash
-git clone git@github.com:Felipp3san/42-libft.git libft
+git clone git@github.com:dedantas/Libft.git libft
 cd libft
 ```
 
